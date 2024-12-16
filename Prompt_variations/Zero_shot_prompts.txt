@@ -1,0 +1,553 @@
+Zero Shot: 
+
+ 
+
+Strategy 0: 
+
+Unstructured: 
+
+prompt = f""" Your task is to fix the given buggy Verilog code and provide the complete, functioning version without adding any extra words, comments, or explanations in your response. 
+
+ Your goal is to make one or more simple changes, focusing on the lines where the bug might originate, while ensuring that the overall logic and structure of the code remain unchanged.   
+
+The buggy Verilog code that needs to be fixed is as follows:  
+
+<<< \n{buggy_verilog_code}\n >>>. """ 
+
+ 
+
+Structured: 
+
+prompt: 
+
+prompt4 = f"""  
+
+### Your Task: ###  
+
+Fix the buggy Verilog code using the input information provided below to help you identify and resolve the bug. Be sure to follow the instructions and the response format mentioned below to ensure accurate corrections. 
+
+ 
+
+### Instructions: ###  
+
+1. Follow the input information provided carefully to identify and fix the bug. 
+
+2. Focus on making one or more simple changes in the lines where the bug might originate.  
+
+3. Ensure that the overall logic and structure of the code remain unchanged. 
+
+ 
+
+### Response Format: ###  
+
+Provide the complete, functional Verilog code without any extra words, comments, or explanations. 
+
+ 
+
+ ### Input Information: ###  
+
+1. The buggy Verilog code that needs to be fixed:  
+
+<<< {buggy_verilog_code} >>> 
+
+""" 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Strategy 1: 
+
+Unstructured: 
+
+prompt = f""" Your task is to fix the given buggy Verilog code and provide the complete, functioning version without adding any extra words, comments, or explanations in your response. 
+
+ Your goal is to make one or more simple changes, focusing on the lines where the bug might originate, while ensuring that the overall logic and structure of the code remain unchanged.  
+
+After comparing the output of the correct and buggy code, a mismatch was identified between the two outputs. The elements in the code responsible for this mismatch have been identified as potential sources of the bug. These elements, which may include input ports, output ports, registers, wires, or data types, are: <<<{tmp_mismatch_set}>>>. 
+
+  
+
+The buggy Verilog code that needs to be fixed is as follows:  
+
+<<< \n{buggy_verilog_code}\n >>>. """ 
+
+ 
+
+Structured: 
+
+prompt: 
+
+prompt4 = f"""  
+
+### Your Task: ###  
+
+Fix the buggy Verilog code using the input information provided below to help you identify and resolve the bug. Be sure to follow the instructions and the response format mentioned below to ensure accurate corrections. 
+
+ 
+
+### Instructions: ###  
+
+1. Follow the input information provided carefully to identify and fix the bug. 
+
+2. Focus on making one or more simple changes in the lines where the bug might originate.  
+
+3. Ensure that the overall logic and structure of the code remain unchanged. 
+
+ 
+
+ 
+
+### Response Format: ###  
+
+Provide the complete, functional Verilog code without any extra words, comments, or explanations. 
+
+ 
+
+ ### Input Information: ###  
+
+1. After comparing the output of the correct and buggy code, a mismatch was identified between the two outputs. The elements in the code responsible for this mismatch have been identified as potential sources of the bug. These elements, which may include input ports, output ports, registers, wires, or data types, are: <<<{tmp_mismatch_set}>>> 
+
+ 
+
+ 
+
+2. The buggy Verilog code that needs to be fixed:  
+
+<<< {buggy_verilog_code} >>> 
+
+""" 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Strategy 2: 
+
+Unstructured: 
+
+prompt = f""" Your task is to fix the given buggy Verilog code and provide the complete, functioning version without adding any extra words, comments, or explanations in your response. 
+
+ Your goal is to make one or more simple changes, focusing on the lines where the bug might originate, while ensuring that the overall logic and structure of the code remain unchanged.  
+
+ After simulating the buggy Verilog code with the testbench, the output signal at each time step was compared to the output signal values from the oracle file.  
+
+The oracle file represents the correct expected output from the bug-free version of the code.   
+
+The differences are formatted as follows:  
+
+For example:  
+
+At time step T with inputs: <input1> = <actual_input_value>, <input2> = <actual_input_value>, ...  
+
+The expected output for <output1> from the correct code should be <expected_output_value>, but the actual value is <actual_output_value> in the buggy code.  
+
+The comparison revealed the following differences:  
+
+<<< \n {prompt_text} \n >>>"  
+
+  
+
+The buggy Verilog code that needs to be fixed is as follows:  
+
+<<< \n{buggy_verilog_code}\n >>>. """ 
+
+ 
+
+Structured: 
+
+prompt: 
+
+prompt4 = f"""  
+
+### Your Task: ###  
+
+Fix the buggy Verilog code using the input information provided below to help you identify and resolve the bug. Be sure to follow the instructions and the response format mentioned below to ensure accurate corrections. 
+
+ 
+
+### Instructions: ###  
+
+1. Follow the input information provided carefully to identify and fix the bug. 
+
+2. Focus on making one or more simple changes in the lines where the bug might originate.  
+
+3. Ensure that the overall logic and structure of the code remain unchanged. 
+
+ 
+
+ 
+
+### Response Format: ###  
+
+Provide the complete, functional Verilog code without any extra words, comments, or explanations. 
+
+ 
+
+ ### Input Information: ###  
+
+1. After simulating the buggy Verilog code with the testbench, the output signal at each time step was compared to the output signal values from the oracle file.  
+
+The oracle file represents the correct expected output from the bug-free version of the code.   
+
+The differences are formatted as follows:  
+
+For example:  
+
+At time step T with inputs: <input1> = <actual_input_value>, <input2> = <actual_input_value>, ...  
+
+The expected output for <output1> from the correct code should be <expected_output_value>, but the actual value is <actual_output_value> in the buggy code.  
+
+The comparison revealed the following differences:  
+
+<<< \n {prompt_text} \n >>> 
+
+ 
+
+2. The buggy Verilog code that needs to be fixed:  
+
+<<< {buggy_verilog_code} >>> 
+
+""" 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Strategy 3: 
+
+Unstructured: 
+
+prompt = f""" Your task is to fix the given buggy Verilog code and provide the complete, functioning version without adding any extra words, comments, or explanations in your response. 
+
+ Your goal is to make one or more simple changes, focusing on the lines where the bug might originate, while ensuring that the overall logic and structure of the code remain unchanged.  
+
+   
+
+Fault localization has been performed to identify lines that may be contributing to the bug. While the following lines are suspected as potential sources, the bug may exist in other parts of the code as well. Consider all possible sources of the error when providing your corrected version of the Verilog code.   
+
+Lines identified by fault localization that might contain the bug are:   
+
+<<< \n {implicated_lines_summary} \n >>>.  
+
+The buggy Verilog code that needs to be fixed is as follows:  
+
+<<< \n{buggy_verilog_code}\n >>>. """ 
+
+ 
+
+Structured: 
+
+prompt: 
+
+prompt4 = f"""  
+
+### Your Task: ###  
+
+Fix the buggy Verilog code using the input information provided below to help you identify and resolve the bug. Be sure to follow the instructions and the response format mentioned below to ensure accurate corrections. 
+
+ 
+
+### Instructions: ###  
+
+1. Follow the input information provided carefully to identify and fix the bug. 
+
+2. Focus on making one or more simple changes in the lines where the bug might originate.  
+
+3. Ensure that the overall logic and structure of the code remain unchanged. 
+
+ 
+
+ 
+
+### Response Format: ###  
+
+Provide the complete, functional Verilog code without any extra words, comments, or explanations. 
+
+ 
+
+ ### Input Information: ###  
+
+1. Fault localization has been performed to identify lines that may be contributing to the bug. While the following lines are suspected as potential sources, the bug may exist in other parts of the code as well. Consider all possible sources of the error when providing your corrected version of the Verilog code.   
+
+Lines identified by fault localization that might contain the bug are:   
+
+<<< \n {implicated_lines_summary} \n >>> 
+
+ 
+
+2. The buggy Verilog code that needs to be fixed:  
+
+<<< {buggy_verilog_code} >>> 
+
+""" 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Strategy 4: 
+
+Unstructured: 
+
+prompt = f""" Your task is to fix the given buggy Verilog code and provide the complete, functioning version without adding any extra words, comments, or explanations in your response. 
+
+ Your goal is to make one or more simple changes, focusing on the lines where the bug might originate, while ensuring that the overall logic and structure of the code remain unchanged.  
+
+ After simulating the buggy Verilog code with the testbench, the output signal at each time step was compared to the output signal values from the oracle file.  
+
+The oracle file represents the correct expected output from the bug-free version of the code.   
+
+The differences are formatted as follows:  
+
+For example:  
+
+At time step T with inputs: <input1> = <actual_input_value>, <input2> = <actual_input_value>, ...  
+
+The expected output for <output1> from the correct code should be <expected_output_value>, but the actual value is <actual_output_value> in the buggy code.  
+
+The comparison revealed the following differences:  
+
+<<< \n {prompt_text} \n >>> 
+
+  
+
+  
+
+Fault localization has been performed to identify lines that may be contributing to the bug. While the following lines are suspected as potential sources, the bug may exist in other parts of the code as well. Consider all possible sources of the error when providing your corrected version of the Verilog code.   
+
+Lines identified by fault localization that might contain the bug are:   
+
+<<< \n {implicated_lines_summary} \n >>>.  
+
+The buggy Verilog code that needs to be fixed is as follows:  
+
+<<< \n{buggy_verilog_code}\n >>>. """ 
+
+ 
+
+Structured: 
+
+prompt: 
+
+prompt4 = f"""  
+
+### Your Task: ###  
+
+Fix the buggy Verilog code using the input information provided below to help you identify and resolve the bug. Be sure to follow the instructions and the response format mentioned below to ensure accurate corrections. 
+
+ 
+
+### Instructions: ###   
+
+1. Follow the input information provided carefully to identify and fix the bug.  
+
+2. Focus on making one or more simple changes in the lines where the bug might originate.   
+
+3. Ensure that the overall logic and structure of the code remain unchanged. 
+
+ 
+
+### Response Format: ###  
+
+Provide the complete, functional Verilog code without any extra words, comments, or explanations. 
+
+ 
+
+ ### Input Information: ###  
+
+1. After simulating the buggy Verilog code with the testbench, the output signal at each time step was compared to the output signal values from the oracle file.  
+
+The oracle file represents the correct expected output from the bug-free version of the code.   
+
+The differences are formatted as follows:  
+
+For example:  
+
+At time step T with inputs: <input1> = <actual_input_value>, <input2> = <actual_input_value>, ...  
+
+The expected output for <output1> from the correct code should be <expected_output_value>, but the actual value is <actual_output_value> in the buggy code.  
+
+The comparison revealed the following differences:  
+
+<<< \n {prompt_text} \n >>> 
+
+ 
+
+2. Fault localization has been performed to identify lines that may be contributing to the bug. While the following lines are suspected as potential sources, the bug may exist in other parts of the code as well. Consider all possible sources of the error when providing your corrected version of the Verilog code.   
+
+Lines identified by fault localization that might contain the bug are:   
+
+<<< \n {implicated_lines_summary} \n >>> 
+
+ 
+
+3. The buggy Verilog code that needs to be fixed:  
+
+<<< {buggy_verilog_code} >>> 
+
+""" 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+ 
+
+Strategy 5: 
+
+Unstructured: 
+
+prompt = f""" Your task is to fix the given buggy Verilog code and provide the complete, functioning version without adding any extra words, comments, or explanations in your response. 
+
+ Your goal is to make one or more simple changes, focusing on the lines where the bug might originate, while ensuring that the overall logic and structure of the code remain unchanged.  
+
+After comparing the output of the correct and buggy code, a mismatch was identified between the two outputs. The elements in the code responsible for this mismatch have been identified as potential sources of the bug. These elements, which may include input ports, output ports, registers, wires, or data types, are: <<<{tmp_mismatch_set}>>>. 
+
+ After simulating the buggy Verilog code with the testbench, the output signal at each time step was compared to the output signal values from the oracle file.  
+
+The oracle file represents the correct expected output from the bug-free version of the code.   
+
+The differences are formatted as follows:  
+
+For example:  
+
+At time step T with inputs: <input1> = <actual_input_value>, <input2> = <actual_input_value>, ...  
+
+The expected output for <output1> from the correct code should be <expected_output_value>, but the actual value is <actual_output_value> in the buggy code.  
+
+The comparison revealed the following differences:  
+
+<<< \n {prompt_text} \n >>> 
+
+  
+
+  
+
+Fault localization has been performed to identify lines that may be contributing to the bug. While the following lines are suspected as potential sources, the bug may exist in other parts of the code as well. Consider all possible sources of the error when providing your corrected version of the Verilog code.   
+
+Lines identified by fault localization that might contain the bug are:   
+
+<<< \n {implicated_lines_summary} \n >>>.  
+
+The buggy Verilog code that needs to be fixed is as follows:  
+
+<<< \n{buggy_verilog_code}\n >>>. """ 
+
+ 
+
+Structured: 
+
+prompt: 
+
+prompt4 = f"""  
+
+### Your Task: ###  
+
+Fix the buggy Verilog code using the input information provided below to help you identify and resolve the bug. Be sure to follow the instructions and the response format mentioned below to ensure accurate corrections. 
+
+ 
+
+### Instructions: ###   
+
+1. Follow the input information provided carefully to identify and fix the bug.  
+
+2. Focus on making one or more simple changes in the lines where the bug might originate.   
+
+3. Ensure that the overall logic and structure of the code remain unchanged. 
+
+ 
+
+### Response Format: ###  
+
+Provide the complete, functional Verilog code without any extra words, comments, or explanations. 
+
+ 
+
+ ### Input Information: ###  
+
+1. After comparing the output of the correct and buggy code, a mismatch was identified between the two outputs. The elements in the code responsible for this mismatch have been identified as potential sources of the bug. These elements, which may include input ports, output ports, registers, wires, or data types, are: <<<{tmp_mismatch_set}>>> 
+
+ 
+
+2. After simulating the buggy Verilog code with the testbench, the output signal at each time step was compared to the output signal values from the oracle file.  
+
+The oracle file represents the correct expected output from the bug-free version of the code.   
+
+The differences are formatted as follows:  
+
+For example:  
+
+At time step T with inputs: <input1> = <actual_input_value>, <input2> = <actual_input_value>, ...  
+
+The expected output for <output1> from the correct code should be <expected_output_value>, but the actual value is <actual_output_value> in the buggy code.  
+
+The comparison revealed the following differences:  
+
+<<< \n {prompt_text} \n >>> 
+
+ 
+
+3. Fault localization has been performed to identify lines that may be contributing to the bug. While the following lines are suspected as potential sources, the bug may exist in other parts of the code as well. Consider all possible sources of the error when providing your corrected version of the Verilog code.   
+
+Lines identified by fault localization that might contain the bug are:   
+
+<<< \n {implicated_lines_summary} \n >>> 
+
+ 
+
+4. The buggy Verilog code that needs to be fixed:  
+
+<<< {buggy_verilog_code} >>> 
+
+""" 
+
+ 
+
+ 
+
+ 

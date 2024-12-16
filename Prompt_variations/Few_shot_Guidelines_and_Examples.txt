@@ -1,0 +1,288 @@
+few_shot_examples= f""" Follow the guidelines and examples provided below to learn how to spot and correct common issues. Use these as inspiration to identify bugs and apply the necessary fixes. 
+
+    For detailed instructions and additional examples on bug repair, refer to the following guidelines: 
+    
+
+    1. **Conditional Statements**: 
+
+        If there's a defect in conditional statements, invert the condition of the code block or correct the logical structure. 
+
+        **Examples:** 
+
+        - Example 1: 
+
+            ```verilog 
+
+            // Buggy line in conditional statement: Incorrect condition causes failure in signal check. 
+
+            if (signal_ready == 1'b1) begin //buggy line 
+
+            // Fixed line: Inverted the condition to correct signal check. 
+
+            if (signal_ready == 1'b0) begin //fixed line 
+
+            ``` 
+
+        - Example 2: 
+
+            ```verilog 
+
+            // Buggy line in conditional statement: Missing else-if leads to incorrect control flow. 
+
+            if (valid_data) begin //buggy line 
+
+            // Fixed line: Added else-if for proper control flow. 
+
+            else if (valid_data) begin //fixed line 
+
+            ``` 
+
+        - Example 3: 
+
+            ```verilog 
+
+            // Buggy line in conditional statement: Reset condition incorrect, leads to improper state assignment. 
+
+            if (reset == 1'b1) state <= INIT; //buggy line 
+
+            // Fixed line: Negated reset condition to fix state assignment. 
+
+            if (reset == 1'b0) state <= INIT; //fixed line 
+
+            ``` 
+
+    
+
+    2. **Sensitivity List**: 
+
+        If the issue lies in the sensitivity list, verify that the always block triggers appropriately. This includes triggering the always block on signal's falling edge, rising edge, or any change to variables. 
+
+    
+
+        **Examples:** 
+
+        - Example 1: 
+
+            ```verilog 
+
+            // Buggy line in sensitivity list: Incorrect edge trigger causes missed timing events. 
+
+            always @(posedge clk) begin //buggy line 
+
+            // Fixed line: Changed posedge to negedge for correct event trigger. 
+
+            always @(negedge clk) begin //fixed line 
+
+            ``` 
+
+        - Example 2: 
+
+            ```verilog 
+
+            // Buggy line in sensitivity list: Edge condition for clk and reset incorrect, causing improper reset behavior. 
+
+            always @(negedge clk or reset) begin //buggy line 
+
+            // Fixed line: Corrected edge conditions for clk and reset. 
+
+            always @(posedge clk or negedge reset) begin //fixed line 
+
+            ``` 
+
+        - Example 3: 
+
+            ```verilog 
+
+            // Buggy line in sensitivity list: Missing clock trigger for proper synchronization. 
+
+            always @(data or reset) begin //buggy line 
+
+            // Fixed line: Added proper clock trigger for synchronization. 
+
+            always @(posedge clk or posedge reset) begin //fixed line 
+
+            ``` 
+
+    
+
+    3. **Assignment Block**: 
+
+        When dealing with assignment block defects, convert between blocking and non-blocking assignments as needed. 
+
+    
+
+        **Examples:** 
+
+        - Example 1: 
+
+            ```verilog 
+
+            // Buggy line in assignment block: Incorrect blocking assignment causes race conditions. 
+
+            out_signal = 1'b1; //buggy line 
+
+            // Fixed line: Converted blocking to non-blocking to avoid race conditions. 
+
+            out_signal <= 1'b1; //fixed line 
+
+            ``` 
+
+        - Example 2: 
+
+            ```verilog 
+
+            // Buggy line in assignment block: Non-blocking assignment causes delay in data registration. 
+
+            data_reg <= input_data; //buggy line 
+
+            // Fixed line: Changed to blocking assignment for immediate data update. 
+
+            data_reg = input_data; //fixed line 
+
+            ``` 
+
+        - Example 3: 
+
+            ```verilog 
+
+            // Buggy line in assignment block: Blocking assignment causes incorrect timing for state update. 
+
+            ready = ready_next; //buggy line 
+
+            // Fixed line: Changed to non-blocking assignment for correct timing. 
+
+            ready <= ready_next; //fixed line 
+
+            ``` 
+
+    
+
+    4. **Numeric Value**: 
+
+        For numeric value discrepancies, adjust the identifier by incrementing or decrementing it, or correct width mismatches. 
+
+    
+
+        **Examples:** 
+
+        - Example 1: 
+
+            ```verilog 
+
+            // Buggy line in numeric value: Off-by-one error in parameter causes incorrect count. 
+
+            parameter COUNT_MAX = 7; //buggy line 
+
+            // Fixed line: Corrected the parameter value by incrementing. 
+
+            parameter COUNT_MAX = 8; //fixed line 
+
+            ``` 
+
+        - Example 2: 
+
+            ```verilog 
+
+            // Buggy line in numeric value: Incorrect wire width leads to data truncation. 
+
+            output wire [7:0] data_out; //buggy line 
+
+            // Fixed line: Corrected wire width to prevent data truncation. 
+
+            output wire [15:0] data_out; //fixed line 
+
+            ``` 
+
+        - Example 3: 
+
+            ```verilog 
+
+            // Buggy line in numeric value: Incorrect binary number leads to incorrect indexing. 
+
+            assign index = 4'b111; //buggy line 
+
+            // Fixed line: Corrected binary number. 
+
+            assign index = 4'b0111; //fixed line 
+
+            ``` 
+
+    
+
+    5. **Default Case in Case Statements**: 
+
+        If the default case in a case statement is missing, add the default case to ensure proper operation. 
+
+    
+
+        **Examples:** 
+
+        - Example 1: 
+
+            ```verilog 
+
+            // Buggy code in case statement: Missing default case leads to unexpected behavior. 
+
+            case (current_state) 
+
+            START: next_state = IDLE; 
+
+            IDLE: next_state = EXEC; 
+
+            endcase //buggy code 
+
+            // Fixed code: Added default case for proper state handling. 
+
+            case (current_state) 
+
+            START: next_state = IDLE; 
+
+            IDLE: next_state = EXEC; 
+
+            default: next_state = ERROR; 
+
+            endcase //fixed code 
+
+            ``` 
+    
+
+    6. **Bitshifting Logic**: 
+
+        If the bug is in bitshifting logic, verify the shift operator used and correct it. 
+
+    
+
+        **Examples:** 
+
+        - Example 1: 
+
+            ```verilog 
+
+            // Buggy line in bitshifting logic: Incorrect operator used for bitshifting. 
+
+            data_shifted = value > 2; //buggy line 
+
+            // Fixed line: Corrected operator for bitshift operation. 
+
+            data_shifted = value >> 2; //fixed line 
+
+            ``` 
+
+        - Example 2: 
+
+            ```verilog 
+
+            // Buggy line in bitshifting logic: Incorrect direction for bitshift operation. 
+
+            result = input_data << 1; //buggy line 
+
+            // Fixed line: Corrected direction of bitshift. 
+
+            result = input_data >> 1; //fixed line 
+
+            ``` 
+
+    Use these guidelines and examples to fix the given buggy Verilog code 
+    
+
+    """ 
