@@ -1,0 +1,2 @@
+Filename,Scenario ID,Tokens Input,Model Type,Tokens Output Iteration_1,Tokens Output Iteration_2,Tokens Output Iteration_3,Tokens Output Iteration_4,Tokens Output Iteration_5,Fitness Iteration_1,Fitness Iteration_2,Fitness Iteration_3,Fitness Iteration_4,Fitness Iteration_5,Cost Input,Cost Output,Cost Total,Time,Simulation Status,Simulation Time
+decoder_3_to_8_wadden_buggy1.v,0,2004,gpt-4o-2024-05-13,393,396.0,396.0,396.0,396.0,1.0,1.0,1.0,1.0,1.0,,,,,,
